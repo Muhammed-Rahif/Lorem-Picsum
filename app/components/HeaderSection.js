@@ -16,7 +16,7 @@ function HeaderSection(props) {
         <Image
           width="100%"
           height="100%"
-          source={require("../assets/images/icon.png")}
+          source={require("../assets/images/logo1.png")}
         />
         <Text style={styles.text}>Welcome to Lorem Picsum</Text>
         <Text style={[styles.text,{opacity:.45,fontSize:10}]}>Image-gallery</Text>

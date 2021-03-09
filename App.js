@@ -15,10 +15,10 @@ import { createStackNavigator } from "@react-navigation/stack";
 import HeaderSection from "./app/components/HeaderSection";
 import ImageBox from "./app/components/ImageBox";
 import PreLoading from "./app/components/PreLoading";
-import { useEffect } from "react/cjs/react.development";
 
 import colors from "./app/config/colors";
 import axios from "axios";
+import ViewImage from "./app/components/ViewImage";
 
 class HomeScreen extends Component {
   constructor(props){
@@ -44,7 +44,7 @@ class HomeScreen extends Component {
   
   fetchImages(){
     axios
-    .get(`https://picsum.photos/v2/list?limit=${this.state.images.length+2}`)
+    .get(`https://picsum.photos/v2/list?limit=${this.state.images.length+5}`)
     .then((response) => {
       this.setState({images:response.data});
       this.setState({preLoading:false})
@@ -123,10 +123,22 @@ function App() {
           options={{
             headerStyle: {
               backgroundColor: colors.third,
+              elevation:24
             },
             headerTitle: (props) => <LogoTitle />,
           }}
           component={HomeScreen}
+        />
+        <Stack.Screen
+          name="viewImage"
+          options={{
+            headerStyle: {
+              backgroundColor: colors.third,
+              elevation:24
+            },
+            headerTitle: (props) => <LogoTitle />,
+          }}
+          component={ViewImage}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -9,28 +9,29 @@ import {
   View,
   Linking,
   ToastAndroid,
-  Alert
+  Alert,
 } from "react-native";
 import { useDimensions } from "@react-native-community/hooks";
 import Icon from "react-native-vector-icons/FontAwesome";
 import PreLoading from "../components/PreLoading";
+import { useNavigation } from '@react-navigation/native';
 
-import * as MediaLibrary from 'expo-media-library';
+import * as MediaLibrary from "expo-media-library";
 import * as FileSystem from "expo-file-system";
-import * as Permissions from 'expo-permissions';
-
+import * as Permissions from "expo-permissions";
 
 import colors from "../config/colors";
 
 function ImageBox(props) {
+  const navigation = useNavigation();
   const showToast = (msg) => {
-    ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT,ToastAndroid.CENTER);
+    ToastAndroid.showWithGravity(msg, ToastAndroid.SHORT, ToastAndroid.CENTER);
   };
 
   const [imageload, setImageLoad] = useState(0);
   return (
     <View style={[styles.container]}>
-      <TouchableOpacity style={{ zIndex: 3 }}>
+      <TouchableOpacity onPress={() => {navigation.push('viewImage',props.fileDetails) }} style={{ zIndex: 3,height:"100%" }}>
         <Image
           style={styles.image}
           source={{
@@ -75,7 +76,7 @@ function ImageBox(props) {
                     props.fileDetails.download_url,
                     props.fileDetails.url
                   );
-                  showToast("Downloading in background..!")
+                  showToast("Downloading in background..!");
                 }}
               >
                 Download
@@ -86,7 +87,7 @@ function ImageBox(props) {
                 name="chrome"
                 backgroundColor={colors.grey}
                 onPress={() => {
-                  showToast("Opening in web..!")
+                  showToast("Opening in web..!");
                   Linking.openURL(props.fileDetails.url);
                 }}
               >
@@ -100,32 +101,36 @@ function ImageBox(props) {
   );
 }
 
-
-function downloadFile(uri,secondUri){
+function downloadFile(uri, secondUri) {
   let n = secondUri.lastIndexOf("/");
-  let imageName = secondUri.substring(n+1);
+  let imageName = secondUri.substring(n + 1);
   let milliSeconds = new Date().getUTCMilliseconds();
-  let fileUri = FileSystem.documentDirectory + milliSeconds + imageName + ".jpg";
+  let fileUri =
+    FileSystem.documentDirectory + milliSeconds + imageName + ".jpg";
   FileSystem.downloadAsync(uri, fileUri)
-  .then(({ uri }) => {
-      saveFile(uri,imageName);
+    .then(({ uri }) => {
+      saveFile(uri, imageName);
     })
-    .catch(error => {
+    .catch((error) => {
       console.error(error);
-    })
+    });
 }
 
-const saveFile = async (fileUri,imageName) => {
+const saveFile = async (fileUri, imageName) => {
   const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
   if (status === "granted") {
-      const asset = await MediaLibrary.createAssetAsync(fileUri)
-      await MediaLibrary.createAlbumAsync("Download", asset, false).then((res)=>{
-        Alert.alert(`Downloader`,`Download completed, Saved in file://Download/${imageName}.jpg`,[{text:"Ok"}])
-      })
+    const asset = await MediaLibrary.createAssetAsync(fileUri);
+    await MediaLibrary.createAlbumAsync("Download", asset, false).then(
+      (res) => {
+        Alert.alert(
+          `Downloader`,
+          `Download completed, Saved in file://Download/${imageName}.jpg`,
+          [{ text: "Ok" }]
+        );
+      }
+    );
   }
-}
-
-
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -135,10 +140,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     borderRadius: 26,
+    elevation:18
   },
   image: {
     margin: 12,
     borderRadius: 26,
+    backgroundColor:colors.primary
   },
   bottomSection: {
     width: "100%",
