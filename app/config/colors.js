@@ -1,0 +1,12 @@
+module.exports={
+    primary:"whitesmoke",
+    secondary:"black",
+    third:"lightgrey",
+    success:"#198754",
+    danger:"#dc3545",
+    warning:"#ffc107",
+    light:"#f8f9fa",
+    dark:"#212529",
+    grey:"#6c757d",
+    blue1:"#0d6efd"
+}

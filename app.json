@@ -3,7 +3,7 @@
     "name": "Lorem-Picsum",
     "slug": "Lorem-Picsum",
     "version": "1.0.0",
-    "orientation": "portrait",
+    "orientation": "default",
     "icon": "./apps/assets/images/icon.png",
     "splash": {
       "image": "./apps/assets/images/splash.png",
