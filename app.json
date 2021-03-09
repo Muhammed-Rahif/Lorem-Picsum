@@ -4,9 +4,9 @@
     "slug": "Lorem-Picsum",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./apps/assets/images/icon.png",
+    "icon": "./app/assets/images/icon.png",
     "splash": {
-      "image": "./apps/assets/images/splash.png",
+      "image": "./app/assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,12 +21,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./apps/assets/images/adaptive-icon.png",
+        "foregroundImage": "./app/assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./apps/assets/images/favicon.png"
+      "favicon": "./app/assets/images/favicon.png"
     }
   }
 }
