@@ -23,7 +23,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.muhammedrahif.LoremPicsum"
     },
     "web": {
       "favicon": "./app/assets/images/favicon.png"
